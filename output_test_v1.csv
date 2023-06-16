@@ -1,0 +1,5 @@
+foot,rail_section,tie_plate_width,tie_plate_length,tie_plate_area,max_bending_moment,max_bending_stress,max_deflection,max_pressure,max_seat_force,required_rail_section_modulus,calculated_section_modulus,calculated_rail/tie_bearing_stress,non-linear_rail/tie_bearing_stress,required_tie_plate_size_nonlinear,calculated_tie/ballast_bearing_stress,minimum_calculated_ballast_thickness,actual_ballast_stress,longitude,latidude
+0.1,115,8,14,112.0,1348857.3294463775,61200.0,2.25,1192.0,23244.0,22.04,65.49,207.54,311.3,174.33,113.94,32.15,25.0,1233,30
+0.2,115,8,14,112.0,1348857.3294463775,61200.0,2.25,1192.0,23244.0,22.04,65.49,207.54,311.3,174.33,42.73,14.67,25.0,1234,50
+0.3,115,8,14,112.0,1348857.3294463775,61200.0,2.25,1192.0,23244.0,22.04,65.49,207.54,311.3,174.33,26.29,9.95,24.99,1233,42
+0.4,115,8,14,112.0,1348857.3294463775,61200.0,2.25,1192.0,23244.0,22.04,65.49,207.54,311.3,174.33,21.36,8.43,24.98,1234,47

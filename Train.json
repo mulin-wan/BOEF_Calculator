@@ -1,0 +1,30 @@
+{
+    "Locomotive 1": {
+        "static_load_values": [36250, 36250, 41375, 36410],
+        "diameter_values": [36.00, 36.00, 36.00, 36.00],
+        "distance_values": [83.75, 454.50, 83.75],
+        "wheel_num": 4,
+        "coupler_lengths": [40.25, 105.75]
+    },
+    "Locomotive 2": {
+        "static_load_values": [40000, 46250, 56250, 66250, 76000, 86000],
+        "diameter_values": [46.00, 45.00, 44.00, 43.00, 42.00, 41.00],
+        "distance_values": [83.75, 80.00, 454.50, 80.00, 83.75],
+        "wheel_num": 6,
+        "coupler_lengths": [50.25, 115.75]
+    },
+    "Wagon 1": {
+        "static_load_values": [36250, 36250, 41375, 36410],
+        "diameter_values": [36.00, 36.00, 36.00, 36.00],
+        "distance_values": [70.00, 416.00, 70.00],
+        "wheel_num": 4,
+        "coupler_lengths": [40.25, 40.25]
+    },
+    "Wagon 2": {
+        "static_load_values": [50000, 60000, 70000, 80000],
+        "diameter_values": [26.00, 26.00, 26.00, 26.00],
+        "distance_values": [70.00, 416.00, 70.00],
+        "wheel_num":4,
+        "coupler_lengths": [40.25, 40.25]
+    }
+}
