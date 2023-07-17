@@ -1,5 +1,5 @@
 # tkinter_edit.py
-import matplotlib.pyplot as plt
+import os
 import tkinter as tk
 import pandas as pd
 from tkinter import filedialog
@@ -182,13 +182,24 @@ class Application(tk.Frame):
             "rail_side": side,
             "track_modulus": track_modulus
         })
+        #self.display_plot(max_bending_moments, foot_data)
+        '''
+        Write the output DataFrame to a CSV file;
+        Open a dialog for the user to choose the output file path;
+        Prepare the output file name.
+        '''
+        directory, filename = os.path.split(self.input_file_path)
+        name, ext = os.path.splitext(filename)
+        
+        # Replace all possible variants of "input" with the corresponding "output" variant
+        name = name.replace("inputs", "outputs").replace("input", "output")
+        name = name.replace("Inputs", "Outputs").replace("Input", "Output")
+        name = name.replace("INPUTS", "OUTPUTS").replace("INPUT", "OUTPUT")
 
-        #self.display_plot(max_bending_moments)
-        self.display_plot(max_bending_moments, foot_data)
+        output_file_name = name + ext
 
-        # Write the output DataFrame to a CSV file
         # Open a dialog for the user to choose the output file path
-        output_file_path = filedialog.asksaveasfilename(defaultextension=".csv", filetypes=[("CSV files", "*.csv")])
+        output_file_path = filedialog.asksaveasfilename(defaultextension=".csv", initialfile=output_file_name, filetypes=[("CSV files", "*.csv")])
 
         # Check if a file path was chosen
         if output_file_path:
@@ -199,33 +210,33 @@ class Application(tk.Frame):
             self.status_label['text'] = "No output file selected."
 
 
-    def display_plot(self, max_bending_moments, foot_data):
-        plt.figure(figsize=(6, 5), dpi=100)
-        ax = plt.gca()
+    # def display_plot(self, max_bending_moments, foot_data):
+    #     plt.figure(figsize=(6, 5), dpi=100)
+    #     ax = plt.gca()
 
-        red_threshold = 50000
-        yellow_threshold = 30000
+    #     red_threshold = 50000
+    #     yellow_threshold = 30000
 
-        # Add threshold lines
-        ax.axhline(red_threshold, color=(1, 0, 0), linestyle='--')  # Red: RGB(255, 0, 0)
-        ax.axhline(yellow_threshold, color=(1, 153/255, 0), linestyle='--')  # Yellow: RGB(255, 153, 0)
+    #     # Add threshold lines
+    #     ax.axhline(red_threshold, color=(1, 0, 0), linestyle='--')  # Red: RGB(255, 0, 0)
+    #     ax.axhline(yellow_threshold, color=(1, 153/255, 0), linestyle='--')  # Yellow: RGB(255, 153, 0)
 
-        # Convert foot_data into a list
-        foot_data_list = foot_data.tolist()
+    #     # Convert foot_data into a list
+    #     foot_data_list = foot_data.tolist()
 
-        # Split data into red, yellow, and green segments
-        for i, max_bending_moment in enumerate(max_bending_moments):
-            if max_bending_moment > red_threshold:
-                color = (1, 0, 0)  # Red: RGB(255, 0, 0)
-            elif max_bending_moment > yellow_threshold:
-                color = (1, 153/255, 0)  # Yellow: RGB(255, 153, 0)
-            else:
-                color = (36/255, 231/255, 128/255)  # Green: RGB(36, 231, 128)
+    #     # Split data into red, yellow, and green segments
+    #     for i, max_bending_moment in enumerate(max_bending_moments):
+    #         if max_bending_moment > red_threshold:
+    #             color = (1, 0, 0)  # Red: RGB(255, 0, 0)
+    #         elif max_bending_moment > yellow_threshold:
+    #             color = (1, 153/255, 0)  # Yellow: RGB(255, 153, 0)
+    #         else:
+    #             color = (36/255, 231/255, 128/255)  # Green: RGB(36, 231, 128)
 
-            if i < len(max_bending_moments) - 1:
-                ax.plot([foot_data_list[i], foot_data_list[i + 1]], [max_bending_moments[i], max_bending_moments[i + 1]], color=color)
+    #         if i < len(max_bending_moments) - 1:
+    #             ax.plot([foot_data_list[i], foot_data_list[i + 1]], [max_bending_moments[i], max_bending_moments[i + 1]], color=color)
 
-        ax.set_xlabel('Foot')
-        ax.set_ylabel('Max Bending Moment')
-        ax.set_title('Max Bending Moment along Route')
-        plt.show()
+    #     ax.set_xlabel('Foot')
+    #     ax.set_ylabel('Max Bending Moment')
+    #     ax.set_title('Max Bending Moment along Route')
+    #     plt.show()

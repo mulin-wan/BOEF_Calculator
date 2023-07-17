@@ -60,7 +60,7 @@ class BendingMomentCalculator:
                         max_bending_moment = bending_moment
                         max_configuration = coupled_car
         except (TypeError, KeyError, ZeroDivisionError):
-            return None
+            return None, None
 
         return max_bending_moment, max_configuration
 
@@ -75,30 +75,33 @@ class BendingMomentCalculator:
             max_bending_moment = self.calculate_max_bending_moment(combined_values)
             max_bending_stress = self.calculate_bending_stress(max_bending_moment, c, I)
         except(TypeError, KeyError, ZeroDivisionError):
-            return None
+            # Return a tuple of None values instead of a single None
+            return None, None, None, None, None
 
         return dynamic_load, wheel_params, combined_values, max_bending_moment, max_bending_stress
+
     
 #From now on we calculater all the needed parameters
 
     # This function extracts the parameters from the foot data.
     def get_parameters_from_foot_data(self, foot_data):
         parameters = {
-            'track_modulus': float(foot_data['track_modulus']),
-            'rail_section': float(foot_data['rail_section']),
-            'elasticity': float(foot_data['elasticity']),
-            'tie_spacing': float(foot_data['tie_spacing']),
-            'tie_width': float(foot_data['tie_width']),
-            'tie_thickness': float(foot_data['tie_thickness']),
-            'tie_length': float(foot_data['tie_length']),
-            'tie_plate_width': float(foot_data['tie_plate_width']),
-            'tie_plate_length': float(foot_data['tie_plate_length']),
-            'inertia_moment': foot_data['I'],
-            'zhead': foot_data['Zhead'],
-            'zbase': foot_data['Zbase'],
-            'c': foot_data['c']
+            'track_modulus': None if foot_data['track_modulus'].strip() == '' else float(foot_data['track_modulus']),
+            'rail_section': None if foot_data['rail_section'].strip() == '' else float(foot_data['rail_section']),
+            'elasticity': None if foot_data['elasticity'].strip() == '' else float(foot_data['elasticity']),
+            'tie_spacing': None if foot_data['tie_spacing'].strip() == '' else float(foot_data['tie_spacing']),
+            'tie_width': None if foot_data['tie_width'].strip() == '' else float(foot_data['tie_width']),
+            'tie_thickness': None if foot_data['tie_thickness'].strip() == '' else float(foot_data['tie_thickness']),
+            'tie_length': None if foot_data['tie_length'].strip() == '' else float(foot_data['tie_length']),
+            'tie_plate_width': None if foot_data['tie_plate_width'].strip() == '' else float(foot_data['tie_plate_width']),
+            'tie_plate_length': None if foot_data['tie_plate_length'].strip() == '' else float(foot_data['tie_plate_length']),
+            'inertia_moment': None if foot_data['I'] == '' else foot_data['I'],
+            'zhead': None if foot_data['Zhead'] == '' else foot_data['Zhead'],
+            'zbase': None if foot_data['Zbase'] == '' else foot_data['Zbase'],
+            'c': None if foot_data['c'] == '' else foot_data['c']
         }
         return parameters
+
 
     # This function calculates the wheel rotation speed.
     def calculate_theta(self, car, speed):
